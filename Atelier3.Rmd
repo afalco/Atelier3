@@ -1,0 +1,62 @@
+---
+title: "Atelier 3"
+author: "Votre nom et prenom"
+date: "16/10/2019"
+output:
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Tableaux de données
+
+Il y a un type d’objets que nous avons déjà abordé dans le chapitre Premier travail avec les données, il s’agit du tableau de données ou data frame en anglais.
+Propriétés et création
+
+Dans R, les tableaux de données sont tout simplement des listes avec quelques propriétés spéficiques :
+
+    les tableaux de données ne peuvent contenir que des vecteurs ;
+    tous les vecteurs d’un tableau de données ont la même longueur ;
+    tous les éléments d’un tableau de données sont nommés et ont chacun un nom unique.
+
+Dès lors, un tableau de données correspond aux fichiers de données que l’on a l’habitude de manipuler dans d’autres logiciels de statistiques comme SPSS ou Stata. Les variables sont organisées en colonnes et les observations en lignes.
+
+On peut créer un tableau de données avec la fonction data.frame :
+
+```{r}
+df <- data.frame(sexe = c("f", "f", "h", "h"), age = c(52, 31, 29, 35), blond = c(FALSE, TRUE, TRUE, FALSE))
+df
+class(df$sexe)
+class(df$age)
+class(df$blond)
+```
+
+```{r}
+str(df)
+```
+La fonction data.frame a un gros défaut : si on ne désactive pas l’option stringsAsFactors elle transforme les chaînes de caractères, ici la variable sexe en facteurs (un type de vecteur que nous aborderons plus en détail dans un prochain chapitre)
+```{r}
+df <- data.frame(sexe = c("f", "f", "h", "h"), age = c(52, 31, 29, 35), blond = c(FALSE, TRUE, TRUE, FALSE), stringsAsFactors = FALSE)
+df
+```
+
+```{r}
+str(df)
+```
+
+Un tableau de données étant une liste, la fonction length renverra le nombre d’éléments de la liste, donc dans le cas présent le nombre de variables et names leurs noms :
+
+```{r}
+length(df)
+names(df)
+```
+
+## Importer des données par internet
+
+```{r}
+nutriage <- read.csv("https://afalco.000webhostapp.com/cursos/nutriage.csv",header=TRUE)
+length(nutriage)
+```
+names(nutriage)
